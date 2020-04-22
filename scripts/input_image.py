@@ -21,7 +21,8 @@ import copy
 from PIL import Image
 
 
-
+#repo_dir = 'C:\\Users\MP_lab_GPU\Desktop\Senior Design 2019\Senior Design\'
+repo_dir = '/Users/bencohen/OneDrive/Documents/Rutgers/repo/'
 #%%
 imsize = 256
 loader = transforms.Compose([
@@ -43,35 +44,48 @@ model = models.resnet152(pretrained=True)
 num_ftrs = model.fc.in_features
 
 model.fc = nn.Linear(num_ftrs, 2)
-model.load_state_dict(torch.load("C:\\Users\\MP_lab_GPU\\Desktop\\Senior Design 2019\\Senior Design\\model_state_dict_combined.pt"))
+model.load_state_dict(torch.load(repo_dir + '/model/model_state_dict_combined.pt', map_location=torch.device('cpu')))
 model.eval()
-malignant_path = 'C:\\Users\MP_lab_GPU\Desktop\Senior Design 2019\Senior Design\Photos for Testing\Malignant\\'
-non_malignant_path = 'C:\\Users\\MP_lab_GPU\\Desktop\\Senior Design 2019\\Senior Design\\Photos for Testing\\Non_Malignant\\'
+malignant_path = repo_dir + '/images/cropped_test/Malignant/'
+non_malignant_path = repo_dir + '/images/cropped_test/Non-Malignant/'
 #%%
 #### THE FIRST ARGUMENT IS BENIGN, SECOND IS MALIGNANT
-tp = 0 #num correctly diagnosed malignant
-fp = 0 #num incorrectly diagnosed malignant
-tn = 0 #num correctly diagnosed benign
-fn = 0 #num incorrectly diagnosed negative
+tp = [] #num correctly diagnosed malignant
+fp = [] #num incorrectly diagnosed malignant
+tn = [] #num correctly diagnosed benign
+fn = [] #num incorrectly diagnosed negative
+errors = 0
+num_malignant = 0
+num_non_malignant = 0
 
 for i in os.listdir(malignant_path):
-    image = image_loader(loader, os.path.join(malignant_path, i))
-
-    y = model(image)
-    if y.argmax().item() == 0:
-        fn = fn + 1
-    else:
-        tp = tp + 1
+    try:
+        image = image_loader(loader, os.path.join(malignant_path, i))
+        
+        y = model(image)
+        if y.argmax().item() == 0:
+            fn.append(i)
+        else:
+            tp.append(i)
+        num_malignant +=1
+    except:
+        print(i)
+        errors +=1
         
 for i in os.listdir(non_malignant_path):
-    image = image_loader(loader, os.path.join(non_malignant_path, i))
+    try:
+        image = image_loader(loader, os.path.join(non_malignant_path, i))
+        num_non_malignant +=1
+        y = model(image)
+        if y.argmax().item() == 0:
+            tn.append(i)
+        else:
+            fp.append(i)
+    except:
+        errors +=1
 
-    y = model(image)
-    if y.argmax().item() == 0:
-        tn = tn + 1
-    else:
-        fp = fp + 1
-        
+    
+            
     
     
 #%%
