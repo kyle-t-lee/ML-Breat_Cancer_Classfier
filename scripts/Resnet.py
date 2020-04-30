@@ -169,7 +169,7 @@ if __name__ == "__main__":
         ]),
     }
     
-    data_dir = 'breakhis_v1'
+    data_dir = 'C:\\Users\\MP_lab_GPU\\Desktop\\Senior Design 2019\\images\\BreaKHis_with_cellphone'
     image_datasets = {x: datasets.ImageFolder(os.path.join(data_dir, x),
                                               data_transforms[x])
                       for x in ['train', 'val']}
@@ -189,11 +189,11 @@ if __name__ == "__main__":
 #    imshow(out, title=[class_names[x] for x in classes])
 #    
     
-    model_ft = models.resnet152(pretrained=True)
-    num_ftrs = model_ft.fc.in_features
+    model_ft = models.vgg16(pretrained=True)
+   # num_ftrs = model_ft.fc.in_features
     # Here the size of each output sample is set to 2.
     # Alternatively, it can be generalized to nn.Linear(num_ftrs, len(class_names)).
-    model_ft.fc = nn.Linear(num_ftrs, 2)
+    #model_ft.fc = nn.Linear(num_ftrs, 2)
     
     model_ft = model_ft.to(device)
     
@@ -206,10 +206,10 @@ if __name__ == "__main__":
     exp_lr_scheduler = lr_scheduler.StepLR(optimizer_ft, step_size=7, gamma=0.1)
     num_epochs = 20
     model_ft, vl, va, tl, ta = train_model(model_ft, criterion, optimizer_ft, exp_lr_scheduler,
-                       num_epochs=20)
+                       num_epochs= 20)
     
     va = [x.item() for x in va]
-    ta = [x.item(0 for x in ta)]
+    ta = [x.item() for x in ta]
     x = np.arange(num_epochs)
     plt.figure()
     plt.plot(x, vl, tl)
@@ -217,6 +217,7 @@ if __name__ == "__main__":
     plt.xlabel('Epochs')
     plt.ylabel('Loss')
     plt.title('Loss')
+    plt.savefig('C:\\Users\\MP_lab_GPU\\Desktop\\Senior Design 2019\\graphs\\vgg_loss.png')
     
     plt.figure()
     plt.plot(x, va, ta)
@@ -224,17 +225,18 @@ if __name__ == "__main__":
     plt.xlabel('Epochs')
     plt.ylabel('Percentage')
     plt.title('Accuracy')
+    plt.savefig('C:\\Users\\MP_lab_GPU\\Desktop\\Senior Design 2019\\graphs\\vgg_accuracy.png')
+    
     
  #%%   
-   # va = [x.item() for x in va]
-    ta = [x.item() for x in ta]
+   
     out_data = pd.DataFrame([vl, va, tl, ta])
     out_data = out_data.T
     out_data.columns = ['val_loss', 'val_acc', 'train_loss', 'train_acc']
-    out_data.to_csv("C:\\Users\\MP_lab_GPU\\Desktop\\Senior Design 2019\\Senior Design\\training_data.txt", sep = '\t', index = False)
+    out_data.to_csv("C:\\Users\\MP_lab_GPU\\Desktop\\Senior Design 2019\\model\\vgg_training_data.txt", sep = '\t', index = False)
     
     #%%
     
-    torch.save(model_ft,"C:\\Users\\MP_lab_GPU\\Desktop\\Senior Design 2019\\Senior Design\\model_combines.pt")
+    torch.save(model_ft,"C:\\Users\\MP_lab_GPU\\Desktop\\Senior Design 2019\\model\\vgg_model.pt")
     
-    torch.save(model_ft.state_dict(),"C:\\Users\\MP_lab_GPU\\Desktop\\Senior Design 2019\\Senior Design\\model_state_dict_combined.pt")
+    torch.save(model_ft.state_dict(),"C:\\Users\\MP_lab_GPU\\Desktop\\Senior Design 2019\\model\\vgg_model_state_dict.pt")

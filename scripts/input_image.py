@@ -43,10 +43,10 @@ model = models.resnet152(pretrained=True)
 num_ftrs = model.fc.in_features
 
 model.fc = nn.Linear(num_ftrs, 2)
-model.load_state_dict(torch.load("C:\\Users\\MP_lab_GPU\\Desktop\\Senior Design 2019\\Senior Design\\model_state_dict_combined.pt"))
+model.load_state_dict(torch.load("C:\\Users\\MP_lab_GPU\\Desktop\\Senior Design 2019\\model\\cellphone_model_state_dict.pt"))
 model.eval()
-malignant_path = 'C:\\Users\MP_lab_GPU\Desktop\Senior Design 2019\Senior Design\Photos for Testing\Malignant\\'
-non_malignant_path = 'C:\\Users\\MP_lab_GPU\\Desktop\\Senior Design 2019\\Senior Design\\Photos for Testing\\Non_Malignant\\'
+malignant_path = 'C:\\Users\\MP_lab_GPU\\Desktop\\Senior Design 2019\\images\\Photos_for_Testing\\CroppedImages_Malignant\\'
+non_malignant_path = 'C:\\Users\\MP_lab_GPU\\Desktop\\Senior Design 2019\\images\\Photos_for_Testing\\CroppedImages_Non_Malignant\\'
 #%%
 #### THE FIRST ARGUMENT IS BENIGN, SECOND IS MALIGNANT
 tp = 0 #num correctly diagnosed malignant
