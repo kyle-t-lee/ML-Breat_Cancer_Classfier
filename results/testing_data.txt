@@ -1,0 +1,5 @@
+Model	TP	TN	FP	FN
+Alexnet	724	315	56	31
+Googlenet	755	0	371	0
+Resnet	732	307	64	23
+VGG	732	355	36	23
