@@ -18,12 +18,18 @@ import os
 #name = input("Enter image name: ")
 
 #shortcut - change "directory", change file "name"
-directory = r"C:\Users\joekh\Documents\GitHub\ML-Breat_Cancer_Classfier\images\contrast_images"
+
+# Joe's directory
+#directory = r"C:\Users\joekh\Documents\GitHub\ML-Breat_Cancer_Classfier\images\contrast_images"
+
+# Kyle's Directory
+directory = r"/Users/kylelee/Documents/GitHub/ML-Breat_Cancer_Classfier/images/contrast_images"
 os.chdir(directory)
 name = 'clear'
 
 if(os.path.exists(name + '.jpeg')):
-    image = skimage.color.rgb2gray(skimage.io.imread(directory + "\\" + name + '.jpeg'))
+    image = skimage.color.rgb2gray(skimage.io.imread(directory + "//" + name + '.jpeg'))    # mac/linux directory format
+    #image = skimage.color.rgb2gray(skimage.io.imread(directory + "\\" + name + '.jpeg'))   # windows directory format
     y = image[400,:]
     x = np.arange(len(y))
 

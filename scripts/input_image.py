@@ -24,8 +24,8 @@ from PIL import Image
 #repo_dir = 'C:\\Users\MP_lab_GPU\Desktop\Senior Design 2019\Senior Design\'
 
 # CHANGE THIS DIRECTORY TO THE ML BREAST CANCER TOTAL FILES FOLDER
-repo_dir = r'C:\Users\joekh\Documents\GitHub\ML-Breat_Cancer_Classfier\\'
-
+#repo_dir = r'C:\Users\joekh\Documents\GitHub\ML-Breat_Cancer_Classfier\\'
+repo_dir = r'/Users/kylelee/Documents/GitHub/ML-Breat_Cancer_Classfier'
 
 #%%
 imsize = 256
@@ -50,12 +50,18 @@ num_ftrs = model.fc.in_features
 model.fc = nn.Linear(num_ftrs, 2)
 
 #CHANGE PATH TO MODEL PATH, CHANGE MAP LOCATION BASED ON GPU
-model.load_state_dict(torch.load(r"C:\Users\joekh\Documents\GitHub\ML-Breat_Cancer_Classfier\model\model_state_dict.pt",map_location=torch.device('cpu')))
+#model.load_state_dict(torch.load(r"C:\Users\joekh\Documents\GitHub\ML-Breat_Cancer_Classfier\model\model_state_dict.pt",map_location=torch.device('cpu')))
+model.load_state_dict(torch.load(r'/Users/kylelee/Documents/GitHub/ML-Breat_Cancer_Classfier/model/model_state_dict.pt',map_location=torch.device('cpu')))
 model.eval()
+
+
 #CHANGE PATH LOCATION TO FOLDER WITH CROPPED MALIGNANT IMAGES
-malignant_path = r'C:\Users\joekh\Documents\GitHub\ML-Breat_Cancer_Classfier\images\Photos for Testing\CroppedImages Malignant\\'
+#malignant_path = r'C:\Users\joekh\Documents\GitHub\ML-Breat_Cancer_Classfier\images\Photos for Testing\CroppedImages Malignant\\'
+malignant_path = r'/Users/kylelee/Documents/GitHub/ML-Breat_Cancer_Classfier/images/Photos for Testing/CroppedImages Malignant'
+
 #CHANGE PATH LOCATION TO FOLDER WITH CROPPED NONMALIGNANT IMAGES
-non_malignant_path = r'C:\Users\joekh\Documents\GitHub\ML-Breat_Cancer_Classfier\images\Photos for Testing\CroppedImages Non_Malignant\\'
+#non_malignant_path = r'C:\Users\joekh\Documents\GitHub\ML-Breat_Cancer_Classfier\images\Photos for Testing\CroppedImages Non_Malignant\\'
+non_malignant_path = r'/Users/kylelee/Documents/GitHub/ML-Breat_Cancer_Classfier/images/Photos for Testing/CroppedImages Non_Malignant'
 
 #%%
 #### THE FIRST ARGUMENT IS BENIGN, SECOND IS MALIGNANT
