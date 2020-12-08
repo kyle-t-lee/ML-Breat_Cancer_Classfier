@@ -3,153 +3,87 @@ import os
 import shutil
 #randomnum=random.uniform(0,1)
 
-root="C:\\Users\\joekh\\Desktop\\Senior Design Code\\images\\Breakhis"
-images = "C:\\Users\\joekh\\Desktop\\Senior Design Code\\images"
+root= r"C:\Users\joekh\Desktop\Senior Design Code\images"
 
 # check for testing and validation folders, if not found, create them
-testingFolder = False
-validationFolder = False
-for folders in os.listdir(images):
-    if (folders == "testing"):
-        testingFolder = True
-    if (folders == "validation"):
-        validationFolder = True
-if (not testingFolder):
-    os.mkdir(os.path.join(images,"testing"))
-if (not validationFolder):
-    os.mkdir(os.path.join(images,"validation"))
+if (not os.path.isdir(os.path.join(root,"test"))):
+    os.mkdir(os.path.join(root,"test"))
+if (not os.path.isdir(os.path.join(root,"val"))):
+    os.mkdir(os.path.join(root,"val"))
 
 # check for malignant and benign folders inside of testing and validation, if not found, create them
-malignantFolder = False
-benignFolder = False
-for classificationFolder in os.listdir(os.path.join(images,"testing")):
-    if (classificationFolder == "malignant"):
-        malignantFolder = True
-    if (classificationFolder == "benign"):
-        benignFolder = True
-if (not malignantFolder):
-    os.mkdir(os.path.join(images,"testing","malignant"))
-if (not benignFolder):
-    os.mkdir(os.path.join(images,"testing", "benign"))
-malignantFolder = False
-benignFolder = False
-for classificationFolder in os.listdir(os.path.join(images,"validation")):
-    if (classificationFolder == "malignant"):
-        malignantFolder = True
-    if (classificationFolder == "benign"):
-        benignFolder = True
-if (not malignantFolder):
-    os.mkdir(os.path.join(images,"validation","malignant"))
-if (not benignFolder):
-    os.mkdir(os.path.join(images,"validation", "benign"))
+if (not os.path.isdir(os.path.join(root,"test","malignant"))):
+    os.mkdir(os.path.join(root,"test","malignant"))
+if (not os.path.isdir(os.path.join(root,"test","benign"))):
+    os.mkdir(os.path.join(root,"test", "benign"))
 
-# check for benign subtypes in testing and validation
-adenosisFolder=False
-fibroadenomaFolder = False
-tubularadenomaFolder = False
-phyllodesFolder = False
-for subtypeFolder in os.listdir(os.path.join(images,"testing","benign")):
-    if (subtypeFolder == "adenosis"):
-        adenosisFolder=True
-    if (subtypeFolder == "fibroadenoma"):
-        fibroadenomaFolder=True
-    if (subtypeFolder == "tubularadenoma"):
-        tubularadenomaFolder = True
-    if (subtypeFolder == "phyllodes"):
-        phyllodesFolder = True
-if (not adenosisFolder):
-    os.mkdir(os.path.join(images,"testing", "benign","adenosis"))
-if (not fibroadenomaFolder):
-    os.mkdir(os.path.join(images,"testing", "benign","fibro adenoma"))
-if (not tubularadenomaFolder):
-    os.mkdir(os.path.join(images,"testing", "benign", "tubular adenoma"))
-if (not phyllodesFolder):
-    os.mkdir(os.path.join(images,"testing", "benign", "phyllodes"))
-adenosisFolder=False
-fibroadenomaFolder = False
-tubularadenomaFolder = False
-phyllodesFolder = False
-for subtypeFolder in os.listdir(os.path.join(images,"validation","benign")):
-    if (subtypeFolder == "adenosis"):
-        adenosisFolder=True
-    if (subtypeFolder == "fibroadenoma"):
-        fibroadenomaFolder=True
-    if (subtypeFolder == "tubularadenoma"):
-        tubularadenomaFolder = True
-    if (subtypeFolder == "phyllodes"):
-        phyllodesFolder = True
-if (not adenosisFolder):
-    os.mkdir(os.path.join(images,"validation", "benign","adenosis"))
-if (not fibroadenomaFolder):
-    os.mkdir(os.path.join(images,"validation", "benign","fibro adenoma"))
-if (not tubularadenomaFolder):
-    os.mkdir(os.path.join(images,"validation", "benign", "tubular adenoma"))
-if (not phyllodesFolder):
-    os.mkdir(os.path.join(images,"validation", "benign", "phyllodes"))
+if (not os.path.isdir(os.path.join(root,"val","malignant"))):
+    os.mkdir(os.path.join(root,"val","malignant"))
+if (not os.path.isdir(os.path.join(root,"val","benign"))):
+    os.mkdir(os.path.join(root,"val", "benign"))
 
-# check for malignant subtypes in testing and validation
-ductalcarcinomaFolder=False
-lobularcarcinomaFolder = False
-mucinouscarcinomaFolder = False
-papillarycarcinomaFolder = False
-for subtypeFolder in os.listdir(os.path.join(images,"testing","malignant")):
-    if (subtypeFolder == "ductal carcinoma"):
-        ductalcarcinomaFolder=True
-    if (subtypeFolder == "lobular carcinoma"):
-        lobularcarcinomaFolder=True
-    if (subtypeFolder == "mucinous carcinoma"):
-        mucinouscarcinomaFolder = True
-    if (subtypeFolder == "papillary carcinoma"):
-        papillarycarcinomaFolder = True
-if (not adenosisFolder):
-    os.mkdir(os.path.join(images,"testing", "malignant","ductal carcinoma"))
-if (not fibroadenomaFolder):
-    os.mkdir(os.path.join(images,"testing", "malignant","lobular carcinoma"))
-if (not tubularadenomaFolder):
-    os.mkdir(os.path.join(images,"testing", "malignant", "mucinous carcinoma"))
-if (not phyllodesFolder):
-    os.mkdir(os.path.join(images,"testing", "malignant", "papillary carcinoma"))
-ductalcarcinomaFolder=False
-lobularcarcinomaFolder = False
-mucinouscarcinomaFolder = False
-papillarycarcinomaFolder = False
-for subtypeFolder in os.listdir(os.path.join(images,"validation","malignant")):
-    if (subtypeFolder == "ductal carcinoma"):
-        ductalcarcinomaFolder=True
-    if (subtypeFolder == "lobular carcinoma"):
-        lobularcarcinomaFolder=True
-    if (subtypeFolder == "mucinous carcinoma"):
-        mucinouscarcinomaFolder = True
-    if (subtypeFolder == "papillary carcinoma"):
-        papillarycarcinomaFolder = True
-if (not adenosisFolder):
-    os.mkdir(os.path.join(images,"validation", "malignant","ductal carcinoma"))
-if (not fibroadenomaFolder):
-    os.mkdir(os.path.join(images,"validation", "malignant","lobular carcinoma"))
-if (not tubularadenomaFolder):
-    os.mkdir(os.path.join(images,"validation", "malignant", "mucinous carcinoma"))
-if (not phyllodesFolder):
-    os.mkdir(os.path.join(images,"validation", "malignant", "papillary carcinoma"))
+# check for test malignant subtypes
+if (not os.path.isdir(os.path.join(root,"test","malignant","ductal_carcinoma"))):
+    os.mkdir(os.path.join(root,"test","malignant","ductal_carcinoma"))
+if (not os.path.isdir(os.path.join(root,"test","malignant","lobular_carcinoma"))):
+    os.mkdir(os.path.join(root,"test","malignant","lobular_carcinoma"))
+if (not os.path.isdir(os.path.join(root,"test","malignant","mucinous_carcinoma"))):
+    os.mkdir(os.path.join(root,"test","malignant","mucinous_carcinoma"))
+if (not os.path.isdir(os.path.join(root,"test","malignant","papillary_carcinoma"))):
+    os.mkdir(os.path.join(root,"test","malignant","papillary_carcinoma"))
+
+# check for val malignant subtypes
+if (not os.path.isdir(os.path.join(root,"val","malignant","ductal_carcinoma"))):
+    os.mkdir(os.path.join(root,"val","malignant","ductal_carcinoma"))
+if (not os.path.isdir(os.path.join(root,"val","malignant","lobular_carcinoma"))):
+    os.mkdir(os.path.join(root,"val","malignant","lobular_carcinoma"))
+if (not os.path.isdir(os.path.join(root,"val","malignant","mucinous_carcinoma"))):
+    os.mkdir(os.path.join(root,"val","malignant","mucinous_carcinoma"))
+if (not os.path.isdir(os.path.join(root,"val","malignant","papillary_carcinoma"))):
+    os.mkdir(os.path.join(root,"val","malignant","papillary_carcinoma"))
+
+# check for test benign subtypes
+if (not os.path.isdir(os.path.join(root,"test","benign","adenosis"))):
+    os.mkdir(os.path.join(root,"test", "benign","adenosis"))
+if (not os.path.isdir(os.path.join(root,"test","benign","fibroadenoma"))):
+    os.mkdir(os.path.join(root,"test", "benign","fibroadenoma"))
+if (not os.path.isdir(os.path.join(root,"test","benign","phyllodes_tumor"))):
+    os.mkdir(os.path.join(root,"test", "benign","phyllodes_tumor"))
+if (not os.path.isdir(os.path.join(root,"test","benign","tubular_adenoma"))):
+    os.mkdir(os.path.join(root,"test", "benign","tubular_adenoma"))
+
+# check for val benign subtypes
+if (not os.path.isdir(os.path.join(root,"val","benign","adenosis"))):
+    os.mkdir(os.path.join(root,"val", "benign","adenosis"))
+if (not os.path.isdir(os.path.join(root,"val","benign","fibroadenoma"))):
+    os.mkdir(os.path.join(root,"val", "benign","fibroadenoma"))
+if (not os.path.isdir(os.path.join(root,"val","benign","phyllodes_tumor"))):
+    os.mkdir(os.path.join(root,"val", "benign","phyllodes_tumor"))
+if (not os.path.isdir(os.path.join(root,"val","benign","tubular_adenoma"))):
+    os.mkdir(os.path.join(root,"val", "benign","tubular_adenoma"))
+
 
 
     
-# split images into training and validation
+# split root into training and validation
+# creates a new folder called test and val with benign malig and sub types
 for classification in os.listdir(root):
-    classDir = os.path.join(root, classification)
-    print(classification)
-    for subtype in os.listdir(classDir):
-        subclassDir = os.path.join(classDir,subtype)
-        print(subtype)
-        for file in os.listdir(subclassDir):
-            randomnum=random.uniform(0,1)
-            if randomnum<float(0.5):
-                print("Move "+file+" to folder "+ os.path.join(images,"testing",classification,subtype))
-                shutil.move(os.path.join(subclassDir, file), os.path.join(images,"testing",classification,subtype))
-            else:
-                print("Move "+file+" to folder "+ os.path.join(images,"validation",classification,subtype))
-                shutil.move(os.path.join(subclassDir, file), os.path.join(images,"validation",classification,subtype))
+    if classification == "benign" or classification == "malignant":
+        classDir = os.path.join(root, classification)
+        print(classification)
+        for subtype in os.listdir(classDir):
+            subclassDir = os.path.join(classDir,subtype)
+            print(subtype)
+            for file in os.listdir(subclassDir):
+                randomnum=random.uniform(0,1)
+                if randomnum<float(0.7):
+                    print("Copy "+file+" to folder "+ os.path.join(root,"test",classification,subtype))
+                    shutil.copy(os.path.join(subclassDir, file), os.path.join(root,"test",classification,subtype))
+                else:
+                    print("Copy "+file+" to folder "+ os.path.join(root,"val",classification,subtype))
+                    shutil.copy(os.path.join(subclassDir, file), os.path.join(root,"val",classification,subtype))
 
-#shutil.move(os.path.join(root, "malignant\\ductol carcinoma\\text.txt"), "C:\\Users\\joekh\\Desktop\\Senior Design Code\\images\\testing\\malignant\\ductol carcinoma")
+#shutil.move(os.path.join(root, "malignant\\ductol carcinoma\\text.txt"), "C:\\Users\\joekh\\Desktop\\Senior Design Code\\root\\testing\\malignant\\ductol carcinoma")
 # for file in os.listdir(root):
 #     randomnum=random.uniform(0,1)
     
