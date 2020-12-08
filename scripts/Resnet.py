@@ -240,3 +240,4 @@ if __name__ == "__main__":
     torch.save(model_ft,"C:\\Users\\MP_lab_GPU\\Desktop\\Senior Design 2019\\model\\vgg_model.pt")
     
     torch.save(model_ft.state_dict(),"C:\\Users\\MP_lab_GPU\\Desktop\\Senior Design 2019\\model\\vgg_model_state_dict.pt")
+# %%

@@ -99,11 +99,7 @@ for i in os.listdir(non_malignant_path):
     except:
         errors +=1
 
-print("False Negatives: "+tp)
-print("False Negatives: "+tn)
-print("False Negatives: "+fp)
-print("False Negatives: "+fn)
-print("Total Number of images: "+str(len(tp)+len(tn)+len(fp)+len(fn)))
+    
             
     
     

@@ -7,15 +7,8 @@ Created on Fri Mar  6 10:26:16 2020
 """
 import numpy as np
 import skimage
-from skimage.color import rgb2gray
-from skimage.io import imread
 import matplotlib.pyplot as plt
-import os
 
-# allow for device input, comment out to use shortcut
-#directory = input("Enter directory path: ")
-#os.chdir(directory)
-#name = input("Enter image name: ")
 
 #shortcut - change "directory", change file "name"
 
@@ -33,11 +26,8 @@ if(os.path.exists(name + '.jpeg')):
     y = image[400,:]
     x = np.arange(len(y))
 
-    plt.plot(x, y)
-    plt.xlabel('Pixel')
-    plt.ylabel('Greyscale Value')
-    plt.title('Clear')
-    plt.ylim([0, 1])
-    plt.show()
-else:
-    print("File does not exist.")
+plt.plot(x, y)
+plt.xlabel('Pixel')
+plt.ylabel('Greyscale Value')
+plt.title('Clear')
+plt.ylim([0, 1])
