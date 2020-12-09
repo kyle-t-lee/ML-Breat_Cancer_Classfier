@@ -169,7 +169,7 @@ if __name__ == "__main__":
         ]),
     }
     
-    data_dir = 'C:\\Users\\MP_lab_GPU\\Desktop\\Senior Design 2019\\images\\BreaKHis_with_cellphone'
+    data_dir = r"C:\Users\joekh\OneDrive\Desktop\Senior Design Code\Data"
     image_datasets = {x: datasets.ImageFolder(os.path.join(data_dir, x),
                                               data_transforms[x])
                       for x in ['train', 'val']}
@@ -217,7 +217,7 @@ if __name__ == "__main__":
     plt.xlabel('Epochs')
     plt.ylabel('Loss')
     plt.title('Loss')
-    plt.savefig('C:\\Users\\MP_lab_GPU\\Desktop\\Senior Design 2019\\graphs\\vgg_loss.png')
+    plt.savefig(r'C:\Users\joekh\OneDrive\Desktop\Senior Design Code\model_v2')
     
     plt.figure()
     plt.plot(x, va, ta)
@@ -225,7 +225,7 @@ if __name__ == "__main__":
     plt.xlabel('Epochs')
     plt.ylabel('Percentage')
     plt.title('Accuracy')
-    plt.savefig('C:\\Users\\MP_lab_GPU\\Desktop\\Senior Design 2019\\graphs\\vgg_accuracy.png')
+    plt.savefig(r'C:\Users\joekh\OneDrive\Desktop\Senior Design Code\model_v2')
     
     
  #%%   
@@ -233,11 +233,10 @@ if __name__ == "__main__":
     out_data = pd.DataFrame([vl, va, tl, ta])
     out_data = out_data.T
     out_data.columns = ['val_loss', 'val_acc', 'train_loss', 'train_acc']
-    out_data.to_csv("C:\\Users\\MP_lab_GPU\\Desktop\\Senior Design 2019\\model\\vgg_training_data.txt", sep = '\t', index = False)
+    out_data.to_csv(r'C:\Users\joekh\OneDrive\Desktop\Senior Design Code\model_v2\vgg_subclass_training_data.txt', sep = '\t', index = False)
     
     #%%
     
-    torch.save(model_ft,"C:\\Users\\MP_lab_GPU\\Desktop\\Senior Design 2019\\model\\vgg_model.pt")
+    torch.save(model_ft,r'C:\Users\joekh\OneDrive\Desktop\Senior Design Code\model_v2\vgg_subclass_model.pt')
     
-    torch.save(model_ft.state_dict(),"C:\\Users\\MP_lab_GPU\\Desktop\\Senior Design 2019\\model\\vgg_model_state_dict.pt")
-# %%
+    torch.save(model_ft.state_dict(),r'C:\Users\joekh\OneDrive\Desktop\Senior Design Code\model_v2\vgg_subclass_model_state_dict.pt')
